@@ -9,6 +9,8 @@
 - Native Vue Lapse/NetCtrl routes on their supported firmware ranges.
 - **ReLapse AIO launched from Vue into the local browser route for firmware 13.02–13.04.** The route is bundled locally; it does not need a remote exploit host. [WebKitty](https://github.com/ArabPixel/WebKitty) and its contributors are credited below.
 
+**Mini Vue:** the main menu has only Jailbreak, Self Check & Repair, and Exit. Separate Settings and Payloads menu entries were removed; their supporting scripts remain in the image.
+
 The firmware ranges and route choice are implemented in [`src/loader.js`](src/loader.js). The source and host checks establish the included code; I have not tested this exact extracted DAT on a physical console.
 
 ## Install `download0.dat` manually
