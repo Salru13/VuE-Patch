@@ -15,10 +15,11 @@ The firmware ranges and route choice are implemented in [`src/loader.js`](src/lo
 
 ## Install `download0.dat` manually
 
-1. Install the PlayStation Vue base application and its **1.24 patch** for title `CUSA00960`. Follow the [Vue-After-Free setup guide](https://github.com/Vuemony/vue-after-free) for the correct base package and initial setup.
-2. Download the [VuE Patch ZIP](https://github.com/Salru13/VuE-Patch/releases/tag/VuE-Patch) and extract **`download0.dat`**. Do not copy the ZIP itself to the console.
-3. Enable FTP on the PS4 and connect to it. Go to **`/user/download/CUSA00960/`**; create that directory if it does not exist. Back up any existing `download0.dat`, then place the extracted **`download0.dat`** there.
-4. Start PlayStation Vue. VuE Patch loads its local files from `download0.dat`. Use **Self Check & Repair** in the menu if files are damaged.
+1. On a PS4 you own or are authorized to modify, **jailbreak the console first** with [WebKitty](https://github.com/ArabPixel/WebKitty) or another method compatible with your firmware, then enable FTP.
+2. Install the PlayStation Vue base app and its **1.24 patch** for title `CUSA00960`. Follow the [Vue-After-Free setup guide](https://github.com/Vuemony/vue-after-free) for the initial setup. **If Vue and the 1.24 patch are already installed, leave them in place and just replace `download0.dat` in step 4.**
+3. Download the [VuE Patch ZIP](https://github.com/Salru13/VuE-Patch/releases/tag/VuE-Patch) and extract **`download0.dat`**. Do not copy the ZIP itself to the console.
+4. Connect to the PS4 by FTP. Go to **`/user/download/CUSA00960/`**; create that directory if it does not exist. Back up any existing `download0.dat`, then place the extracted **`download0.dat`** there.
+5. Start PlayStation Vue. VuE Patch loads its local files from `download0.dat`. Use **Self Check & Repair** in the menu if files are damaged.
 
 The FTP step is for installation. SelfHeal uses local copies and is designed to work without a separate save-file recovery copy or an internet connection. The underlying PS Vue application's launch conditions can depend on the console's setup; this source repository cannot prove every setup will boot without savedata.
 
