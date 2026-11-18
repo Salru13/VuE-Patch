@@ -6,7 +6,7 @@
 
 ## Runtime and ReLapse AIO
 
-`src/loader.js` routes supported configurations to Vue Lapse, NetCtrl, or the bundled local ReLapse AIO route. The latter is carried by `src/aio/carrier-standalone.js` and `src/aio/carrier-composite.js`, with exact installed copies in `generated/`. This route is derived from WebKitty; see `CREDITS.md` and the AGPL license copy.
+`src/loader.js` routes supported configurations to Vue Lapse, NetCtrl, or the bundled local ReLapse AIO route. The latter is carried by `src/aio/carrier-standalone.js` and `src/aio/carrier-composite.js`, with exact installed copies in `generated/`. The route opens a local browser flow from Vue for firmware 13.02–13.04. This route is derived from WebKitty; see `CREDITS.md` and the AGPL license copy.
 
 ## SelfHeal
 
@@ -18,4 +18,4 @@ Standalone AIO carriers are A/G, fallback bundles are B/D, and composite bundle-
 
 ## Maintenance
 
-The primary and fallback bundles intentionally differ in `serve.js.aes` and `themes/default/main.js`. Preserve those variants when rebuilding A-G. The supplied v1.5 PKG is the byte reference for this source snapshot. The active DAT must not receive immutable/nounlink flags; earlier installer records associated that state with launch failure.
+The primary and fallback bundles intentionally differ in `serve.js.aes` and `themes/default/main.js`. Preserve those variants when rebuilding A-G. The supplied PKG is the byte reference for this source snapshot. The active DAT must not receive immutable/nounlink flags; earlier installer records associated that state with launch failure.

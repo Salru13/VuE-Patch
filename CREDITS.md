@@ -1,6 +1,6 @@
 # Credits and provenance
 
-VuE Patch is maintained by **XxXJoker13XxX**. This source snapshot was extracted from the owner's supplied VuE Joker Patch v1.5 PKG. The offline bootstrap, NetCtrl configuration, SelfHeal recovery, UI integration, and local ReLapse AIO routing are modifications in this patch. This does not imply endorsement by upstream projects.
+VuE Patch is maintained by **XxXJoker13XxX**. This source snapshot was extracted from the owner's supplied VuE Joker Patch PKG. The offline bootstrap, NetCtrl configuration, SelfHeal recovery, UI integration, and local ReLapse AIO routing are modifications in this patch. This does not imply endorsement by upstream projects.
 
 ## Vue-After-Free
 

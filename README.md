@@ -1,31 +1,39 @@
 # VuE Patch
 
-Source repository for the VuE runtime patch maintained by **XxXJoker13XxX**. This revision reflects the `download0.dat` extracted from the supplied VuE Joker Patch v1.5 PKG, including SelfHeal v12 and the local ReLapse AIO route. The PKG, DAT, console executables, and payload binaries are not tracked in this repository.
+**Offline PlayStation Vue patch with SelfHeal and a local ReLapse AIO browser route.** Maintained by **XxXJoker13XxX**. The patch is designed to start without an internet service or a separate save-file payload. Installation needs FTP access once; the runtime and recovery files then live in `download0.dat`.
 
-## Intended use
+## What it includes
 
-The patch is designed for local, offline startup without a separate save-file payload. `location.js` sets `requiresPsn` to false and loads `serve.js.aes` from `download0/`. SelfHeal obtains canonical recovery data from local carriers and writes repaired files back to `download0/`; it does not download recovery data. The local ReLapse AIO route is bundled in the image.
+- Local JSMaf bootstrap from `download0.dat`, with `requiresPsn` set to false.
+- Self Check & Repair with redundant local recovery carriers. SelfHeal checks 17 paths, repairs mismatches, and reads files back to verify them.
+- Native Vue Lapse/NetCtrl routes on their supported firmware ranges.
+- **ReLapse AIO launched from Vue into the local browser route for firmware 13.02–13.04.** The route is bundled locally; it does not need a remote exploit host. [WebKitty](https://github.com/ArabPixel/WebKitty) and its contributors are credited below.
 
-A `download0.dat` extracted from the supplied v1.5 PKG is 268435456 bytes with SHA-256 `13c43d28c65965211a97ab1ac287dfeb7abb72162f32d10dc08c386383dc9739`. This is an extraction of the supplied PKG, not a new console-tested combination. Manual installation can follow the upstream [Vue-After-Free instructions](https://github.com/Vuemony/vue-after-free), substituting this DAT where those instructions call for `download0.dat`. Launch and repair on a specific console still require device validation.
+The firmware ranges and route choice are implemented in [`src/loader.js`](src/loader.js). The source and host checks establish the included code; I have not tested this exact extracted DAT on a physical console.
 
-## Credits and licenses
+## Install `download0.dat` manually
 
-Based on [Vue-After-Free](https://github.com/Vuemony/vue-after-free) by Vuemony and contributors (GPL-3.0). The bundled local ReLapse AIO route incorporates [WebKitty](https://github.com/ArabPixel/WebKitty) by ArabPixel and its contributors (AGPL-3.0-or-later). See [CREDITS.md](CREDITS.md), [GPL-3.0](LICENSE), and [WebKitty AGPL-3.0-or-later](LICENSES/WebKitty-AGPL-3.0-or-later.txt). Keep both upstream notices and license obligations when redistributing a combination.
+1. Install the PlayStation Vue base application and its **1.24 patch** for title `CUSA00960`. Follow the [Vue-After-Free setup guide](https://github.com/Vuemony/vue-after-free) for the correct base package and initial setup.
+2. Download the [VuE Patch ZIP](https://github.com/Salru13/VuE-Patch/releases/tag/VuE-Patch) and extract **`download0.dat`**. Do not copy the ZIP itself to the console.
+3. Enable FTP on the PS4 and connect to it. Go to **`/user/download/CUSA00960/`**; create that directory if it does not exist. Back up any existing `download0.dat`, then place the extracted **`download0.dat`** there.
+4. Start PlayStation Vue. VuE Patch loads its local files from `download0.dat`. Use **Self Check & Repair** in the menu if files are damaged.
 
-## Repository layout
+The FTP step is for installation. SelfHeal uses local copies and is designed to work without a separate save-file recovery copy or an internet connection. The underlying PS Vue application's launch conditions can depend on the console's setup; this source repository cannot prove every setup will boot without savedata.
 
-- `src/`: runtime source extracted from the v1.5 DAT, including offline bootstrap, NetCtrl, SelfHeal, UI, and AIO carrier sources.
-- `recovery/`: primary and fallback canonical bundles.
-- `generated/`: exact A-G recovery and AIO modules installed in the v1.5 DAT.
-- `tools/`: deterministic carrier rebuilding and verification.
-- `tests/`: contract and simulated repair checks.
-- `docs/`: architecture and SelfHeal behavior.
+**DAT integrity:** 268,435,456 bytes; SHA-256 `13c43d28c65965211a97ab1ac287dfeb7abb72162f32d10dc08c386383dc9739`. The ZIP contains the exact `download0.dat` extracted from the owner's supplied PKG. No PKG or DAT is committed to this source repository.
 
-The active SelfHeal engine checks 17 paths: 16 runtime files plus the composite AIO carrier. See [SelfHeal recovery contract](docs/SELFHEAL.md).
+## Credits
 
-## Maintenance and verification
+VuE Patch integration and maintenance: **XxXJoker13XxX**.
 
-When a runtime file changes, update its canonical copy in the appropriate recovery bundle and rebuild the generated modules. Keep the active primary bundle aligned with installed runtime files.
+- **[Vuemony / Vue-After-Free](https://github.com/Vuemony/vue-after-free)** — original PlayStation Vue exploit project and runtime. Its GPL-3.0 license is included in [`LICENSE`](LICENSE). Upstream credits: c0w-ar, earthonion, ufm42, D-Link Turtle, Gezine, Helloyunho, Dr.Yenyen, AlAzif, abc, TheFlow, the Lua Loader project, Cryptogenic, and rebelle3.
+- **[ArabPixel / WebKitty](https://github.com/ArabPixel/WebKitty)** — ReLapse AIO browser host foundation. Its AGPL-3.0-or-later license is included in [`LICENSES/WebKitty-AGPL-3.0-or-later.txt`](LICENSES/WebKitty-AGPL-3.0-or-later.txt). Upstream credits: abc, Al-Azif, anonymous, Dr.Yenyen, Egycnq, Feyzee61, Fire30, GattoDev, Jordy, Sonic-Iso, Nathan Fargo, ufm42, payload developers, Nazky, qwertyoruiopz, Raw Game, sleirsgoevy, TheFlow, and m0zz.
+
+See [`CREDITS.md`](CREDITS.md) for provenance and additional notices. The GPL-3.0 and AGPL-3.0-or-later obligations apply to their respective source and the combined distribution as described there. Neither upstream project endorses this patch.
+
+## Source layout and checks
+
+`src/` contains the offline bootstrap, runtime, SelfHeal, UI, and AIO carrier source. `recovery/` contains primary and fallback canonical bundles. `generated/` contains the exact installed A–G recovery modules. `tools/`, `tests/`, and `docs/` contain rebuilding, checks, and design details.
 
 ```bash
 python3 tools/build_recovery_modules.py
@@ -34,4 +42,4 @@ python3 -m unittest discover -s tests -v
 node tests/test_selfheal_engine.js
 ```
 
-All commands must pass before publishing changes. Host simulation does not replace console testing.
+All checks pass for the source snapshot. See [`docs/SELFHEAL.md`](docs/SELFHEAL.md) for recovery placement and write-back details.

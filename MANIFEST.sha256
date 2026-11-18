@@ -1,8 +1,8 @@
 a79691a93b46e49ce460c26ef22afcc03d6eca1e63bf2edbc20e96159510f6c9  ./.gitattributes
 d8647dc943b101b49e85c3dded513ba73fbc2a4fbf03845e4e7b885b5dbe464d  ./.gitignore
-9cabf302a9a022142495972775dd588c33bd893f2f817cf870ec2bc331671b4a  ./CREDITS.md
-ee2f025a117502b9879a56a66b325590083e158ffffc7462c648c1dcef81fcc4  ./docs/ARCHITECTURE.md
-ad7074baf33f5076b145f4ac642b99281f73bc603dab9175c5854a5ef16096a3  ./docs/SELFHEAL.md
+fd92b9ace0f1af6578eed468a8c37eeacd2f3ecaa17e2a639df336bfe91130ac  ./CREDITS.md
+224a403189c328b502055e6e07678ca90f2cedfb37dd809f8ad0735f85902692  ./docs/ARCHITECTURE.md
+9391e1befc4eb3310566101a8645f4f1b127f2a1aea4c4cb9e8f1130e4865a45  ./docs/SELFHEAL.md
 f0ad513c2193af766b0a5ac796b19b3c8a466ee45a88f7cb1a1b9fbb29ec289f  ./generated/recovery-a.js
 ac51967ec5a3e58a04921414e75948a7ce935b54dc961f13107b318a25b52927  ./generated/recovery-b.js
 c6fbbc28d7a5560ec6392d651074f62b2f6e4756efac953643e91366160596ad  ./generated/recovery-c.js
@@ -12,7 +12,7 @@ c6fbbc28d7a5560ec6392d651074f62b2f6e4756efac953643e91366160596ad  ./generated/re
 f0ad513c2193af766b0a5ac796b19b3c8a466ee45a88f7cb1a1b9fbb29ec289f  ./generated/recovery-g.js
 3972dc9744f6499f0f9b2dbf76696f2ae7ad8af9b23dde66d6af86c9dfb36986  ./LICENSE
 0d96a4ff68ad6d4b6f1f30f713b18d5184912ba8dd389f86aa7710db079abcb0  ./LICENSES/WebKitty-AGPL-3.0-or-later.txt
-69aff2801a9f115cf158b477099feaa8404095b5dfcf8b99bafd8b323f478c34  ./README.md
+c2c52336eaf82ad519292f558bf7a16e70e134c645afe52f272d17ebc558145f  ./README.md
 f381c8b9e02644f70ffe1ad4bf862a3d62e3e51cc05af006163c8ecd206c11cf  ./recovery/recovery-bundle-fallback.json
 b16f9735428b485a5dc307009a19a441da5fdc13d394ae7d3b635026d68d82d6  ./recovery/recovery-bundle.json
 51e873cee7b7538e228f29760d077128db559a9e6bfc513036ef4ef9fe14f0e6  ./src/aio/carrier-composite.js
