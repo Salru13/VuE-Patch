@@ -1,19 +1,29 @@
 #!/usr/bin/env python3
-"""Generate the three SelfHeal recovery modules from the canonical bundle."""
+"""Rebuild the exact v1.5 A-G carriers from source snapshots."""
 from pathlib import Path
-import json
 
 ROOT = Path(__file__).resolve().parents[1]
-BUNDLE = ROOT / "recovery" / "recovery-bundle.json"
-OUT = ROOT / "generated"
+PREFIX = b"jsmaf.__selfHealBundle="
 
-obj = json.loads(BUNDLE.read_text(encoding="utf-8"))
-payload = "jsmaf.__selfHealBundle=" + json.dumps(
-    obj, ensure_ascii=False, separators=(",", ":")
-) + ";\n"
 
-OUT.mkdir(parents=True, exist_ok=True)
-for name in ("recovery-a.js", "recovery-b.js", "recovery-c.js"):
-    path = OUT / name
-    path.write_text(payload, encoding="utf-8")
-    print(f"wrote {path}")
+def bundle(name: str) -> bytes:
+    return (ROOT / "recovery" / name).read_bytes().rstrip(b"\n")
+
+
+standalone = (ROOT / "src/aio/carrier-standalone.js").read_bytes()
+composite = (ROOT / "src/aio/carrier-composite.js").read_bytes()
+primary = PREFIX + bundle("recovery-bundle.json") + b";\n" + composite
+fallback = PREFIX + bundle("recovery-bundle-fallback.json") + b";\n"
+
+for letter, content in {
+    "a": standalone,
+    "b": fallback,
+    "c": primary,
+    "d": fallback,
+    "e": primary,
+    "f": primary,
+    "g": standalone,
+}.items():
+    target = ROOT / "generated" / f"recovery-{letter}.js"
+    target.write_bytes(content)
+    print(f"wrote {target.relative_to(ROOT)}")

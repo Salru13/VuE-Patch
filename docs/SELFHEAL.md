@@ -1,9 +1,17 @@
-# SelfHeal recovery and installation contract
+# SelfHeal v12 recovery contract
 
-VuE Patch uses the v8 external recovery design. The already-loaded `serve.js.aes` contains the repair engine. It loads canonical data on demand from `img/susec/a.js`, then `img/feil/b.js`, then `img/susec/c.js`. These modules contain the same 16-file bundle; the three paths are separate recovery candidates. A package or UFS image builder must place their data on distinct inodes and blocks. Three names in this source repository do not prove that property in an installed image.
+This document describes the `download0.dat` extracted from the supplied VuE Joker Patch v1.5 PKG (SHA-256 `13c43d28c65965211a97ab1ac287dfeb7abb72162f32d10dc08c386383dc9739`). The code and generated carriers in this repository were taken from that image. The older v8 source archive is not the authority for this revision.
 
-SelfHeal requires no separate save-file copy or online recovery service; its canonical data is in the local A/B/C modules. Self Check reads each canonical file and compares its full text. Repair writes only mismatches to `download0/` through JSMaf's file XHR API, reads each file back, and then runs a full 16-file check. It can recreate a missing file and refill a truncated file. The menu enables Repair after a complete Self Check; this UI gate is unrelated to filesystem immutable flags.
+## Local recovery data
 
-The later Joker Patch v1.5 installer uses a temporary `download0.dat.new`, verifies it, and commits the image by rename. Its release source records that setting immutable/nounlink on the active `/user/download/CUSA00960/download0.dat` caused Vue CE-30001-4; v1.5 deliberately skips that stage. A distributable installer must preserve that rule. The v1.5 package mechanism is separate from SelfHeal's per-file XHR repair and is not included in this source repository.
+The active primary bundle contains 16 canonical runtime files. The SelfHeal engine additionally checks `img/susec/c.js`, the composite ReLapse AIO carrier. A/G contain standalone AIO route copies; B/D contain the fallback bundle; C/E/F combine the primary bundle with the AIO route. The primary and fallback bundles intentionally have different `serve.js.aes` and `themes/default/main.js` copies. `location.js` reads E, F, then C for a usable bundle. `serve.js.aes` also attempts to recover an AIO carrier from E/F/C.
 
-The supplied v1.5 source archive contains the same SelfHeal v8 `serve.js.aes` and `main.js` bytes as this repository. Its bundled canonical files differ for `loader.js`, `netctrl_c0w_twins.js`, and `themes/default/config_ui.js`; this repository's bundle and A/B/C modules correspond to its newer runtime. Whenever a canonical runtime file changes, regenerate all three modules and run verification. The source comparison and host simulation do not replace an installed-image inode check or a real console recovery test.
+Self Check reads each target and compares full text with the canonical copy. Repair writes only mismatches through JSMaf's local `file://../download0/` API, reads each written file back, and can then check the full set again. The route is local and needs no separate save-file recovery copy or internet service. The UI's Repair availability is distinct from filesystem immutable flags.
+
+## Image and installer requirements
+
+Carrier redundancy depends on distinct UFS inode and data placement in the installed image. The source tree proves only the logical paths and bytes; actual placement needs an image check. The active `/user/download/CUSA00960/download0.dat` must remain writable and must not be set immutable/nounlink. An earlier installer source recorded a Vue launch failure when those flags were applied. This source repo does not contain a PKG installer.
+
+## Verification boundary
+
+The extracted v1.5 DAT has 205 regular files. All 16 active canonical runtime files match the primary bundle. A host simulation verifies 17/17 healthy, two damaged files, two writes, and 17/17 after repair. These checks do not demonstrate launch or repair on a physical PS4 with this exact extracted DAT.

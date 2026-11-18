@@ -1,6 +1,8 @@
 
 var WS_PORT = 40404;
 
+function vueClampExploitSource(v){return(v=+v)===(v|0)&&v>=0&&v<3?v:0;}
+function vueMigrateConfigDocument(d){var o=JSON.parse(JSON.stringify(d&&typeof d==='object'?d:{})),c=o.config||{};delete c.autolapse;delete c.autopoop;delete c.jb_behavior;c.music=false;c.theme='default';c.exploit_source=vueClampExploitSource(c.exploit_source);o.config=c;o.payloads=Array.isArray(o.payloads)?o.payloads:[];return o;}
 var fs = {
     write: function(filename, content, callback) {
         var xhr = new jsmaf.XMLHttpRequest();
@@ -35,12 +37,11 @@ var fs = {
         xhr.send();
     }
 };
-
-
-var selfHealCriticalFiles=['location.js','serve.js.aes','loader.js','netctrl_c0w_twins.js','kernel.js','userland.js','lapse.js','defs.js','types.js','binloader.js','check-jailbroken.js','languages.js','themes/default/main.js','themes/default/config_ui.js','themes/default/payload_host.js','includes/kill_vue.js'];
-function selfHealLoadBundle(cb){if(jsmaf.__selfHealBundle&&jsmaf.__selfHealBundle.files){cb(null,jsmaf.__selfHealBundle);return;}var mods=['img/susec/a.js','img/feil/b.js','img/susec/c.js'],i=0,last=null;function next(){if(i>=mods.length){cb(last||new Error('recovery modules unavailable'),null);return;}var p=mods[i++];jsmaf.__selfHealBundle=null;try{include(p);}catch(e){last=e;next();return;}var b=jsmaf.__selfHealBundle;if(b&&b.files){cb(null,b);return;}last=new Error('invalid recovery module: '+p);next();}next();}
-function selfHealEmit(progress,evt){try{if(typeof log==='function')log('SelfHeal: '+evt.message);}catch(le){}if(typeof progress==='function'){try{progress(evt);}catch(pe){}}}
-function selfHealRun(repair,progress,cb){if(typeof cb!=='function'){cb=progress;progress=null;}var total=selfHealCriticalFiles.length;selfHealEmit(progress,{phase:'bundle',index:0,total:total,file:'',message:'Loading recovery bundle'});selfHealLoadBundle(function(be,b){if(be||!b){var em=be&&be.message?be.message:'recovery bundle unavailable';selfHealEmit(progress,{phase:'error',index:0,total:total,file:'',message:'Bundle error: '+em});cb({checked:0,mismatched:0,repaired:0,failed:1,error:em});return;}var i=0,checked=0,mismatched=0,repaired=0,failed=0;function next(){if(i>=total){selfHealEmit(progress,{phase:'done',index:total,total:total,file:'',message:'Done '+checked+'/'+total+' mismatch='+mismatched+' repaired='+repaired+' failed='+failed});cb({checked:checked,mismatched:mismatched,repaired:repaired,failed:failed});return;}var idx=i+1,p=selfHealCriticalFiles[i++],canonical=b.files[p];selfHealEmit(progress,{phase:'checking',index:idx,total:total,file:p,message:'Checking '+idx+'/'+total+': '+p});if(typeof canonical!=='string'){failed++;selfHealEmit(progress,{phase:'error',index:idx,total:total,file:p,message:'No recovery copy: '+p});next();return;}fs.read(p,function(re,current){checked++;if(!re&&current===canonical){next();return;}mismatched++;selfHealEmit(progress,{phase:'mismatch',index:idx,total:total,file:p,message:'Mismatch: '+p});if(!repair){next();return;}selfHealEmit(progress,{phase:'repairing',index:idx,total:total,file:p,message:'Repairing: '+p});fs.write(p,canonical,function(we){if(we){failed++;selfHealEmit(progress,{phase:'error',index:idx,total:total,file:p,message:'Write failed: '+p});next();return;}fs.read(p,function(ve,vd){if(!ve&&vd===canonical){repaired++;selfHealEmit(progress,{phase:'verified',index:idx,total:total,file:p,message:'Verified: '+p});}else{failed++;selfHealEmit(progress,{phase:'error',index:idx,total:total,file:p,message:'Verify failed: '+p});}next();});});});}next();});}
+var selfHealCriticalFiles=['location.js','serve.js.aes','loader.js','netctrl_c0w_twins.js','kernel.js','userland.js','lapse.js','defs.js','types.js','binloader.js','check-jailbroken.js','languages.js','themes/default/main.js','themes/default/config_ui.js','themes/default/payload_host.js','includes/kill_vue.js','img/susec/c.js'];
+function selfHealLoadBundle(cb){var b=jsmaf.__selfHealBundle;if(b&&b.version==='v12-carrier-redundant'&&b.files)return cb(null,b);if(typeof jsmaf.selfHealCarrierBundle==='function')return jsmaf.selfHealCarrierBundle(cb);cb(new Error('recovery unavailable'),null);}
+function selfHealCanonical(b,p,cb){var c=b&&b.files?b.files[p]:null;if(typeof c==='string')return cb(c);if(p!=='img/susec/c.js')return cb(null);var m=jsmaf.__selfHealAio;if(typeof m==='string'&&m.indexOf('VUE_WEBKITTY_ROUTES')>=0)return cb(m);var a=['img/susec/e.js','img/susec/f.js','img/susec/c.js'],i=0;function n(){if(i>=a.length)return cb(null);fs.read(a[i++],function(e,s){if(!e&&typeof s==='string'&&s.indexOf('VUE_WEBKITTY_ROUTES')>=0){jsmaf.__selfHealAio=s;cb(s);}else n();});}n();}
+function selfHealEmit(p,e){try{if(typeof log==='function')log('SelfHeal: '+e.message);}catch(x){}if(typeof p==='function')try{p(e);}catch(x){}}
+function selfHealRun(r,p,c){if(typeof c!=='function'){c=p;p=null;}var t=selfHealCriticalFiles.length;selfHealLoadBundle(function(be,b){if(be||!b)return c({checked:0,mismatched:0,repaired:0,failed:1,error:be&&be.message?be.message:'recovery unavailable'});var i=0,ch=0,mm=0,rr=0,ff=0;function n(){if(i>=t)return c({checked:ch,mismatched:mm,repaired:rr,failed:ff});var x=i+1,f=selfHealCriticalFiles[i++];selfHealEmit(p,{phase:'checking',index:x,total:t,file:f,message:'Checking '+x+'/'+t+': '+f});selfHealCanonical(b,f,function(v){if(typeof v!=='string'){ff++;return n();}fs.read(f,function(e,s){ch++;if(!e&&s===v)return n();mm++;selfHealEmit(p,{phase:'mismatch',index:x,total:t,file:f,message:'Mismatch: '+f});if(!r)return n();fs.write(f,v,function(w){if(w){ff++;return n();}fs.read(f,function(q,z){if(!q&&z===v){rr++;selfHealEmit(p,{phase:'verified',index:x,total:t,file:f,message:'Verified: '+f});}else ff++;n();});});});});}n();});}
 jsmaf.selfHealRun = selfHealRun;
 var bgmClip = null;
 function stopBgm () {
@@ -85,8 +86,6 @@ function startBgmIfEnabled () {
         stopBgm();
     }
 }
-
-
 try {
     jsmaf.remotePlay = true 
     ws = new jsmaf.WebSocketServer();
@@ -141,7 +140,7 @@ try {
     var successImageCount = 50;
     var failImageCount = 60;
     var randomSuccessNum = Math.floor(Math.random() * successImageCount) + 1;
-    while (randomSuccessNum === 9 || randomSuccessNum === 26 || randomSuccessNum === 34) randomSuccessNum = (randomSuccessNum % successImageCount) + 1;
+    while (randomSuccessNum === 9 || randomSuccessNum === 13 || randomSuccessNum === 26 || randomSuccessNum === 34 || randomSuccessNum === 44 || randomSuccessNum === 46) randomSuccessNum = (randomSuccessNum % successImageCount) + 1;
     var randomFailNum = Math.floor(Math.random() * failImageCount) + 1;
     while (randomFailNum === 43 || randomFailNum === 38) randomFailNum = (randomFailNum % failImageCount) + 1;
 
@@ -198,7 +197,7 @@ try {
             }
         }
 
-        ws.broadcast(msg); // Still send to websocket too
+        ws.broadcast(msg);
     }
     log = function(msg) {
         if (msg === 'Restart the PS4 and try again.' || msg === 'Reboot and try again!') msg = 'Fully turn off your PlayStation 4 and power it on before retrying.';
@@ -220,10 +219,7 @@ try {
             needsConfig = true;
         } else {
             try {
-                var configData = JSON.parse(data);
-                CONFIG = configData.config || {};
-                payloads = configData.payloads || [];
-                log('Config loaded successfully');
+                var configData=vueMigrateConfigDocument(JSON.parse(data));CONFIG=configData.config;payloads=configData.payloads;fs.write('config.json',JSON.stringify(configData,null,2),function(){});log('Config loaded successfully');
             } catch(e) {
                 log('ERROR parsing config.json: ' + e.message);
                 needsConfig = true;
@@ -232,12 +228,10 @@ try {
         if (needsConfig) {
             var defaultConfig = {
                 config: {
-                    autolapse: false,
-                    autopoop: false,
                     autoclose: false,
                     autoclose_delay: 3000,
                     music:false,
-                    jb_behavior: 0,
+                    exploit_source: 0,
                     theme: 'default'
                 },
                 payloads: []
@@ -255,22 +249,8 @@ try {
             });
         }
 
-        if(CONFIG.autolapse){
-            include('loader.js')
-        } else if(CONFIG.autopoop){
-            CONFIG.jb_behavior = 1
-            include('loader.js')
-        } 
-        else {
-            var themeName = CONFIG.theme || 'default';
-            try {
-                include('themes/' + themeName + '/main.js');
-            } catch(e) {
-                log('Failed to load theme "' + themeName + '": ' + e.message);
-                log('Falling back to default theme');
-                include('themes/default/main.js');
-            }
-        }
+        var themeName=CONFIG.theme||'default';
+        try{include('themes/'+themeName+'/main.js');}catch(e){log('Failed to load theme "'+themeName+'": '+e.message);include('themes/default/main.js');}
     });
     ws.onmessage = function(c, e) {
         if (e.data.length === 1 && e.data[0].constructor.name === "String") {
@@ -288,4 +268,4 @@ try {
     };
 } catch(e) {
     alert(`${e.message}\n${e.stack}`);
-}
+}                                                                                                                                                                     

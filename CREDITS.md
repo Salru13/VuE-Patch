@@ -1,13 +1,13 @@
 # Credits and provenance
 
-VuE Patch is maintained by XxXJoker13XxX and is based on the [Vue-After-Free project](https://github.com/Vuemony/vue-after-free) by Vuemony and its contributors. The upstream project is distributed under GPL-3.0; see [LICENSE](LICENSE). This repository contains modified runtime files and recovery copies derived from that project. The upstream project does not endorse this patch.
+VuE Patch is maintained by **XxXJoker13XxX**. This source snapshot was extracted from the owner's supplied VuE Joker Patch v1.5 PKG. The offline bootstrap, NetCtrl configuration, SelfHeal recovery, UI integration, and local ReLapse AIO routing are modifications in this patch. This does not imply endorsement by upstream projects.
 
-The recovery bundle also contains code that references [yarpe's Lapse payload](https://github.com/Helloyunho/yarpe/blob/main/payloads/lapse.py) in `kernel.js`. Keep upstream attribution and license notices when redistributing or modifying those components.
+## Vue-After-Free
 
-VuE Patch changes include offline JSMaf startup, NetCtrl runtime settings, SelfHeal recovery modules, and a Self Check / Repair UI. The generated recovery modules duplicate the canonical files from `recovery/recovery-bundle.json`.
+The Vue runtime is based on [Vuemony/vue-after-free](https://github.com/Vuemony/vue-after-free), distributed under GPL-3.0; the original license is included as [LICENSE](LICENSE). Its [credits](https://github.com/Vuemony/vue-after-free#credits) name c0w-ar, earthonion, ufm42, D-Link Turtle, Gezine, Helloyunho, Dr.Yenyen, AlAzif, abc, TheFlow, the Lua Loader project, Cryptogenic, and rebelle3. The canonical recovery bundles include copies of upstream runtime code and retain that provenance. `kernel.js` also references [Helloyunho's yarpe Lapse payload](https://github.com/Helloyunho/yarpe/blob/main/payloads/lapse.py).
 
-## Upstream acknowledgements
+## WebKitty and ReLapse AIO
 
-The [Vue-After-Free README](https://github.com/Vuemony/vue-after-free#credits) credits c0w-ar, earthonion, ufm42, D-Link Turtle, Gezine, Helloyunho, Dr.Yenyen, AlAzif, abc, TheFlow, the Lua Loader project, Cryptogenic, and rebelle3 for the upstream exploit, runtime, UI, research, testing, and related work. Those acknowledgements remain with this derivative. The upstream README also lists separate payload sources; no PKG, payload binary, Sony SDK file, or installer binary is included here.
+The local ReLapse AIO route includes work from [ArabPixel/WebKitty](https://github.com/ArabPixel/WebKitty), whose README states AGPL-3.0-or-later; its [license](LICENSES/WebKitty-AGPL-3.0-or-later.txt) is included. Credit to **ArabPixel** and the upstream [WebKitty credits](https://github.com/ArabPixel/WebKitty#credits-in-no-particular-order): abc, Al-Azif, anonymous, Dr.Yenyen, Egycnq, Feyzee61, Fire30, GattoDev, Jordy, Sonic-Iso, Nathan Fargo, ufm42, payload developers, Nazky, qwertyoruiopz, Raw Game, sleirsgoevy, TheFlow, and m0zz. Additional notices within upstream files remain applicable.
 
-This repository provides its complete patch source and generated recovery data under the included GPL-3.0 license. Keep this license, the original project attribution, and any existing source notices when making further copies or changes. The recovery modules duplicate code from the canonical bundle; regenerating them does not change its provenance.
+The Vue-derived portions retain GPL-3.0 terms. WebKitty-derived portions retain AGPL-3.0-or-later terms. The two licenses permit a combined work under GPLv3/AGPLv3 section 13, with the AGPL network-source requirement applying to the combination. Preserve both license texts, notices, and corresponding source on redistribution. The private source repository does not include the PKG or DAT image.
