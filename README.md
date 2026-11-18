@@ -2,7 +2,7 @@
 
 Source repository for the VuE runtime patch maintained by **XxXJoker13XxX**.
 
-The repository contains the VuE-specific runtime changes for offline startup, NetCtrl, SelfHeal, recovery modules, and the Self Check / Repair UI. It contains source and generated JavaScript only; no PKG or console binaries.
+The repository contains the VuE-specific runtime changes for offline startup, NetCtrl, SelfHeal, recovery modules, and the Self Check / Repair UI. It contains source, tests, documentation, and generated JavaScript; no PKG or console binaries.
 
 ## Credits and license
 
@@ -57,7 +57,7 @@ python3 -m unittest discover -s tests -v
 node tests/test_selfheal_engine.js
 ```
 
-Both commands must complete without errors before publishing changes.
+All commands must complete without errors before publishing changes.
 
 ---
 
