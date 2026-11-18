@@ -1,0 +1,9 @@
+# SelfHeal recovery and installation contract
+
+VuE Patch uses the v8 external recovery design. The already-loaded `serve.js.aes` contains the repair engine. It loads canonical data on demand from `img/susec/a.js`, then `img/feil/b.js`, then `img/susec/c.js`. These modules contain the same 16-file bundle; the three paths are separate recovery candidates. A package or UFS image builder must place their data on distinct inodes and blocks. Three names in this source repository do not prove that property in an installed image.
+
+Self Check reads each canonical file and compares its full text. Repair writes only mismatches to `download0/` through JSMaf's file XHR API, reads each file back, and then runs a full 16-file check. It can recreate a missing file and refill a truncated file. The menu enables Repair after a complete Self Check; this UI gate is unrelated to filesystem immutable flags.
+
+The later Joker Patch v1.5 installer uses a temporary `download0.dat.new`, verifies it, and commits the image by rename. Its release source records that setting immutable/nounlink on the active `/user/download/CUSA00960/download0.dat` caused Vue CE-30001-4; v1.5 deliberately skips that stage. A distributable installer must preserve that rule. The v1.5 package mechanism is separate from SelfHeal's per-file XHR repair and is not included in this source repository.
+
+The supplied v1.5 source archive contains the same SelfHeal v8 `serve.js.aes` and `main.js` bytes as this repository. Its bundled canonical files differ for `loader.js`, `netctrl_c0w_twins.js`, and `themes/default/config_ui.js`; this repository's bundle and A/B/C modules correspond to its newer runtime. Whenever a canonical runtime file changes, regenerate all three modules and run verification. The source comparison and host simulation do not replace an installed-image inode check or a real console recovery test.

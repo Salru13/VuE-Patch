@@ -2,7 +2,7 @@
 
 Source repository for the VuE runtime patch maintained by **XxXJoker13XxX**.
 
-The repository contains the VuE-specific runtime changes for offline startup, NetCtrl, SelfHeal, recovery modules, and the Self Check / Repair UI.
+The repository contains the VuE-specific runtime changes for offline startup, NetCtrl, SelfHeal, recovery modules, and the Self Check / Repair UI. It contains source and generated JavaScript only; no PKG or console binaries.
 
 ## Credits and license
 
@@ -43,6 +43,8 @@ docs/
 | `generated/recovery-b.js` | `img/feil/b.js` |
 | `generated/recovery-c.js` | `img/susec/c.js` |
 
+See [SelfHeal recovery and installation contract](docs/SELFHEAL.md) for recovery placement, write-back, and active-image protection requirements.
+
 ## Maintenance
 
 `netctrl_c0w_twins.js` is part of the SelfHeal canonical set. When canonical runtime content changes, update `recovery/recovery-bundle.json` and regenerate all three recovery modules before merging.
@@ -52,6 +54,7 @@ docs/
 ```bash
 python3 tools/verify.py
 python3 -m unittest discover -s tests -v
+node tests/test_selfheal_engine.js
 ```
 
 Both commands must complete without errors before publishing changes.

@@ -35,6 +35,8 @@ Three generated modules carry the same logical bundle:
 
 At runtime, `serve.js.aes` loads A first and falls back to B, then C. Self Check compares the critical set; Repair writes mismatches and verifies the result.
 
+The installed image must keep the three recovery modules on distinct inodes and must not set immutable/nounlink on the active `download0.dat`. See [SelfHeal recovery and installation contract](SELFHEAL.md).
+
 ## UI integration
 
 `src/ui/main.js` adds **Self Check** and **Repair APP** while keeping recovery data outside the menu script. This keeps the startup path lightweight and avoids unnecessary changes to JSMaf initialization timing.
