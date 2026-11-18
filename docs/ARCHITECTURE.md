@@ -6,6 +6,8 @@
 
 The bootstrap is intentionally small and has no remote dependency or secondary network path.
 
+The patch bootstrap and SelfHeal are designed to work without a separate save-file payload: startup and recovery read local `download0/` files. No internet service supplies the recovery data. Full PS Vue launch without savedata is a platform claim that still needs a real-console check.
+
 ## NetCtrl
 
 `src/netctrl_c0w_twins.js` contains the VuE NetCtrl runtime and its tested operating parameters:

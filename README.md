@@ -4,6 +4,12 @@ Source repository for the VuE runtime patch maintained by **XxXJoker13XxX**.
 
 The repository contains the VuE-specific runtime changes for offline startup, NetCtrl, SelfHeal, recovery modules, and the Self Check / Repair UI. It contains source, tests, documentation, and generated JavaScript; no PKG or console binaries.
 
+## Offline and save-file-free design
+
+VuE Patch is intended to run locally, without an internet service or a separate save file carrying the patch. `location.js` sets `requiresPsn` to false and loads `serve.js.aes` from local `download0/`. SelfHeal loads its three recovery copies from the same local image and repairs files there; it does not fetch recovery data from a server or a save file.
+
+These source checks establish the patch bootstrap and SelfHeal paths. Launch behavior of the unmodified PS Vue application and recovery on a real console still require device testing; the source repository alone cannot prove those platform conditions.
+
 ## Credits and license
 
 Based on [Vue-After-Free](https://github.com/Vuemony/vue-after-free) by Vuemony and contributors. See [CREDITS.md](CREDITS.md) and [LICENSE](LICENSE) for provenance and GPL-3.0 terms.
