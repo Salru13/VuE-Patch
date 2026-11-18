@@ -31,6 +31,10 @@ VuE Patch integration and maintenance: **XxXJoker13XxX**.
 
 See [`CREDITS.md`](CREDITS.md) for provenance and additional notices. The GPL-3.0 and AGPL-3.0-or-later obligations apply to their respective source and the combined distribution as described there. Neither upstream project endorses this patch.
 
+## Support
+
+If VuE Patch helps you, you can [support XxXJoker13XxX on Ko-fi](https://ko-fi.com/jokerx13). GitHub also shows this link through the repository Sponsor button.
+
 ## Source layout and checks
 
 `src/` contains the offline bootstrap, runtime, SelfHeal, UI, and AIO carrier source. `recovery/` contains primary and fallback canonical bundles. `generated/` contains the exact installed A–G recovery modules. `tools/`, `tests/`, and `docs/` contain rebuilding, checks, and design details.
